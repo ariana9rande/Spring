@@ -2,14 +2,15 @@ package sample3;
 
 import org.springframework.context.support.GenericXmlApplicationContext;
 
-public class HelloApp
+public class Main2
 {
     public static void main(String[] args)
     {
         GenericXmlApplicationContext ctx = new
                 GenericXmlApplicationContext("classpath*:applicationContext.xml");
-        MessageBean bean = (MessageBean) ctx.getBean("messageBean");
-        bean.sayHello("Spring");
+        MessageBean bean1 = (MessageBean) ctx.getBean("messageBean");
+        MessageBean bean2 = (MessageBean) ctx.getBean("messageBean");
+        System.out.println("(bean1==bean2)=" + (bean1 == bean2));
         ctx.close();
     }
 }
