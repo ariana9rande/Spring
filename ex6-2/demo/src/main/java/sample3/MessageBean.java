@@ -1,0 +1,10 @@
+package sample3;
+
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
+public interface MessageBean
+{
+    void sayHello(String name);
+    void setName(String msg);
+}
