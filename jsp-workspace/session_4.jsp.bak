@@ -1,0 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<html>
+<body>
+	<%
+	String id = (String)session.getAttribute("ID");
+	out.println(id + "´Ô ¾È³çÈ÷ °¡¼¼¿ä.");
+	session.invalidate();
+	%>
+</body>
+</html>

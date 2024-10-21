@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Movie List</title>
+    <script th:inline="javascript">
+        let message = /*[[${message}]]*/"";
+
+        if (message)
+        {
+            alert(message);
+            message = "";
+        }
+    </script>
+</head>
+<body>
+<div th:replace="navbar.html"></div>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Movie List</h1>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr align="center">
+            <th width="10%">번호</th>
+            <th>제목</th>
+            <th>감독</th>
+            <th>줄거리</th>
+            <th width="15%">개봉년도</th>
+            <th width="10%">등급</th>
+            <th th:if="${session.loggedInUser != null && session.loggedInUser.role == 1}">관리</th>
+        </tr>
+        </thead>
+        <tbody th:if="${movieList.isEmpty()}">
+        <tr>
+            <td colspan="5">
+                <p class="text-center"><b><span style="font-size: 9pt">등록된 영화가 없습니다.</span></b></p>
+            </td>
+        </tr>
+        </tbody>
+        <tbody th:unless="${movieList.isEmpty()}">
+        <tr th:each="movie : ${movieList}" align="center">
+            <td th:text="${movie.id}"></td>
+            <td>
+                <a th:href="@{/movie/view/{id}(id = ${movie.id})}" th:text="${movie.title}"></a>
+            </td>
+            <td th:text="${movie.director}"></td>
+            <td th:text="${movie.summary}"></td>
+            <td th:text="${movie.releasedYear}"></td>
+            <td th:text="${movie.rating}"></td>
+            <td th:if="${session.loggedInUser != null && session.loggedInUser.role == 1}">
+                <a th:href="@{/movie/edit/{id}(id = ${movie.id})}" class="btn btn-warning btn-sm">수정</a>
+                <a th:href="@{/movie/delete/{id}(id = ${movie.id})}" class="btn btn-danger btn-sm">삭제</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
